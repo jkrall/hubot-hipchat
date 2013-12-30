@@ -255,5 +255,7 @@ class HipChat extends Adapter
 errmsg = (err) ->
   err + (if err.stack then '\n' + err.stack else '')
 
-exports.use = (robot) ->
-  new HipChat robot
+module.exports = {
+  use: (robot) -> HipChat robot
+  HipChat
+}
