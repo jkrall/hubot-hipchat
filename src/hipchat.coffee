@@ -1,10 +1,11 @@
 {Adapter, TextMessage, EnterMessage, LeaveMessage, User} = require "../../hubot"
 HTTPS = require "https"
 {inspect} = require "util"
-Connector = require "./connector"
+Connector = require './connector'
 promise = require "./promises"
 
 class HipChat extends Adapter
+  @connectorClass = Connector
 
   constructor: (robot) ->
     super robot
@@ -67,7 +68,7 @@ class HipChat extends Adapter
     @logger.debug "HipChat adapter options: #{JSON.stringify @options}"
 
     # create Connector object
-    connector = new Connector
+    connector = new HipChat.connectorClass
       jid: @options.jid
       password: @options.password
       host: @options.host
